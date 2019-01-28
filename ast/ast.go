@@ -1,6 +1,9 @@
 package ast
 
-import "github.com/nyasuto/monkey/token"
+import (
+	"fmt"
+	"github.com/nyasuto/monkey/token"
+)
 
 type Node interface {
 	TokenLiteral() string
@@ -18,6 +21,13 @@ type Expression interface {
 
 type Program struct {
 	Statements []Statement
+}
+
+func (p *Program) Print() {
+
+	for _, x := range p.Statements {
+		fmt.Println(x.TokenLiteral())
+	}
 }
 
 func (p *Program) TokenLiteral() string {
@@ -44,3 +54,11 @@ type Identifier struct {
 
 func (i *Identifier) expressionNode()      {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
+
+type ReturnStatement struct {
+	Token       token.Token
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatement) statementNode()       {}
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
