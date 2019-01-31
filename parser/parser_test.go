@@ -26,7 +26,7 @@ func TestLetStatement(t *testing.T) {
 		t.Fatalf("program.Statements does not contain 3 statements. got=%d", len(program.Statements))
 	}
 
-	program.Print()
+	// fmt.Print(program)
 
 	tests := []struct {
 		expectedIdentifier string
